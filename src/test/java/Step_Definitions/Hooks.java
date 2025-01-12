@@ -7,7 +7,6 @@ import org.openqa.selenium.TakesScreenshot;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-// Add these imports
 import net.masterthought.cucumber.Configuration;
 import net.masterthought.cucumber.ReportBuilder;
 import java.io.File;
@@ -20,7 +19,7 @@ public class Hooks {
     @Before
     public void setupMethod() {
         Driver.getDriver().manage().deleteAllCookies();
-        System.out.println("All cookies deleted");
+        log.info("All cookies deleted");
         Driver.getDriver().manage().window().maximize();
         log.info("@Before: RUNNING before EACH SCENARIO");
     }
@@ -41,10 +40,8 @@ public class Hooks {
 
         byte[] screenshot = ((TakesScreenshot)Driver.getDriver()).getScreenshotAs(OutputType.BYTES);
         scenario.attach(screenshot, "image/png", scenario.getName());
-
-
-        //Driver.closeDriver();
-        System.out.println("After Scenario is running from Hooks");
+        Driver.closeDriver();
+        log.info("After Scenario is running from Hooks");
     }
 
     //@AfterAll

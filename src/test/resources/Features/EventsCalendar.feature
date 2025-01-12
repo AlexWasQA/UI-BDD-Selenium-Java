@@ -14,5 +14,4 @@ Feature: Search Event Using 'Events Calendar'
       | Date       | Mar 2025                          |
     When the user clicks 'Find Event' button
     Then the user should see a calendar with marked event quantities for each day
-    When the user clicks on a day with events
-    Then the user should see a list of events matching the selected criteria for that day
+    When the user clicks on a day with events user should see a list of events matching the selected criteria for that day
