@@ -11,11 +11,19 @@ import java.time.Duration;
 
 public class Driver {
 
-    private Driver(){}
+    private static Driver instance;
+    private Driver() {}
 
     private static InheritableThreadLocal<WebDriver> driverPool = new InheritableThreadLocal<>();
 
-    public static WebDriver getDriver(){
+    public static synchronized Driver getInstance() {
+        if (instance == null) {
+            instance = new Driver();
+        }
+        return instance;
+    }
+
+    public WebDriver getDriver(){
         if (driverPool.get()==null){
             String browserType=Configuration_Reader.getProperty("browser");
             switch (browserType){
@@ -44,10 +52,12 @@ public class Driver {
         }
         return driverPool.get();
     }
-    public static void closeDriver(){
+
+    public void closeDriver(){
         if(driverPool.get() !=null){
             driverPool.get().quit();
             driverPool.remove();
         }
     }
 }
+

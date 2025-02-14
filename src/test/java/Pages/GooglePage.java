@@ -8,7 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 
 public class GooglePage {
     public GooglePage(){
-        PageFactory.initElements(Driver.getDriver(), this);
+        PageFactory.initElements(Driver.getInstance().getDriver(), this);
     }
     @FindBy(xpath = "//*[@name='callout']")
     public WebElement signIframe;

@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class EventsCalendarPage {
 
     public EventsCalendarPage() {
-        PageFactory.initElements(Driver.getDriver(), this);
+        PageFactory.initElements(Driver.getInstance().getDriver(), this);
     }
 
     @FindBy(id = "input--event-type")
@@ -90,11 +90,11 @@ public class EventsCalendarPage {
     }
 
     public void clickingEventAndVerifyingCriterias() {
-        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(15));
+        WebDriverWait wait = new WebDriverWait(Driver.getInstance().getDriver(), Duration.ofSeconds(15));
 
         for (int i = 0; i < eventLinksInCalendar.size(); i++) {
             // Re-locate the element to avoid stale element reference
-            eventLinksInCalendar = Driver.getDriver().findElements(By.cssSelector(".calendar-day--events"));
+            eventLinksInCalendar = Driver.getInstance().getDriver().findElements(By.cssSelector(".calendar-day--events"));
             WebElement eventLink = eventLinksInCalendar.get(i);
             wait.until(ExpectedConditions.elementToBeClickable(eventLink)).click();
 
@@ -113,7 +113,7 @@ public class EventsCalendarPage {
                     () -> assertTrue(eventDateConfirmation.getText().toLowerCase().contains("2025"), "Year 2025 not found in date"),
                     () -> assertTrue(eventDateConfirmation.getText().toLowerCase().contains("mar"), "March not found in date")
             );
-            Driver.getDriver().navigate().back();
+            Driver.getInstance().getDriver().navigate().back();
             // Wait for the calendar to reload and be interactive
             wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector(".calendar-day--events")));
         }

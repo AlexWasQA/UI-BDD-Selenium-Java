@@ -4,6 +4,7 @@ import Utilities.Driver;
 import io.cucumber.java.*;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,9 +19,10 @@ public class Hooks {
 
     @Before
     public void setupMethod() {
-        Driver.getDriver().manage().deleteAllCookies();
+        WebDriver webDriver = Driver.getInstance().getDriver();
+        webDriver.manage().deleteAllCookies();
         log.info("All cookies deleted");
-        Driver.getDriver().manage().window().maximize();
+        webDriver.manage().window().maximize();
         log.info("@Before: RUNNING before EACH SCENARIO");
     }
 
@@ -38,9 +40,10 @@ public class Hooks {
     public void teardownMethod(Scenario scenario) {
         log.info("@After: RUNNING AFTER EACH SCENARIO");
 
-        byte[] screenshot = ((TakesScreenshot)Driver.getDriver()).getScreenshotAs(OutputType.BYTES);
+        WebDriver webDriver = Driver.getInstance().getDriver();
+        byte[] screenshot = ((TakesScreenshot) webDriver).getScreenshotAs(OutputType.BYTES);
         scenario.attach(screenshot, "image/png", scenario.getName());
-        Driver.closeDriver();
+        Driver.getInstance().closeDriver();
         log.info("After Scenario is running from Hooks");
     }
 

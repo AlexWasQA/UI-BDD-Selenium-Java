@@ -9,7 +9,7 @@ public class AKCSearchPage {
     AKCPage akcPage = new AKCPage();
 
     public AKCSearchPage(){
-        PageFactory.initElements(Driver.getDriver(), this);
+        PageFactory.initElements(Driver.getInstance().getDriver(), this);
     }
     @FindBy(xpath = "//div[@class='row comp-event-row conf'][1]")
     public WebElement confirmationEvent;

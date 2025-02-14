@@ -12,14 +12,14 @@ import java.time.Duration;
 public class BasePage {
 
     public BasePage(){
-        PageFactory.initElements(Driver.getDriver(), this);
+        PageFactory.initElements(Driver.getInstance().getDriver(), this);
     }
     @FindBy(xpath = "//*[@id='onetrust-accept-btn-handler']")
     public WebElement acceptCookiesBtn;
 
     public void acceptCookies(){
         acceptCookiesBtn.click();
-        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(Driver.getInstance().getDriver(), Duration.ofSeconds(10));
         wait.until(ExpectedConditions.invisibilityOf(acceptCookiesBtn));
 
 

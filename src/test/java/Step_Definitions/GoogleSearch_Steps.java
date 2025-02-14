@@ -18,8 +18,8 @@ public class GoogleSearch_Steps {
     GooglePage googlePage = new GooglePage();
     @Given("user open google without log in")
     public void user_open_google_without_log_in() {
-        Driver.getDriver().get(Configuration_Reader.getProperty("url"));
-        Driver.getDriver().navigate().refresh();
+        Driver.getInstance().getDriver().get(Configuration_Reader.getProperty("url"));
+        Driver.getInstance().getDriver().navigate().refresh();
     }
 
     @When("user types {string} in search box")
@@ -29,11 +29,11 @@ public class GoogleSearch_Steps {
     @Then("user should see results related to {string} on the page")
     public void user_should_see_results_related_to_on_the_page(String string) {
         // by title
-        assertTrue(Driver.getDriver().getTitle().equals(string + " - Google Search"));
+        assertTrue(Driver.getInstance().getDriver().getTitle().equals(string + " - Google Search"));
 
         //by contains search keyword in each link's titles
 
-        List<WebElement> links = Driver.getDriver().findElements(By.xpath("//a//h3"));
+        List<WebElement> links = Driver.getInstance().getDriver().findElements(By.xpath("//a//h3"));
         // Verify each link's name contains the keyword
         for (WebElement link : links) {
             String linkText = link.getText().toLowerCase();

@@ -22,7 +22,7 @@ public class EventCalendar_Steps {
     EventsCalendarPage eventsCalendarPage = new EventsCalendarPage();
     @Given("the user is on the events search page")
     public void the_user_is_on_the_events_search_page() {
-        Driver.getDriver().get(Configuration_Reader.getProperty("urlAkcEventSearch"));
+        Driver.getInstance().getDriver().get(Configuration_Reader.getProperty("urlAkcEventSearch"));
         basePage.acceptCookies();
     }
     @When("the user clicks the {string} button at the bottom of the page")
@@ -33,10 +33,10 @@ public class EventCalendar_Steps {
     }
     @Then("the user should be redirected to the {string} page")
     public void the_user_should_be_redirected_to_the_page(String string) {
-        Set<String> windowHandles = Driver.getDriver().getWindowHandles();
+        Set<String> windowHandles = Driver.getInstance().getDriver().getWindowHandles();
         for (String handle : windowHandles) {
-            Driver.getDriver().switchTo().window(handle);
-            if (Driver.getDriver().getTitle().equals(Configuration_Reader.getProperty("urlAkcEventsCalendar"))) {
+            Driver.getInstance().getDriver().switchTo().window(handle);
+            if (Driver.getInstance().getDriver().getTitle().equals(Configuration_Reader.getProperty("urlAkcEventsCalendar"))) {
                 break;
             }
         }
